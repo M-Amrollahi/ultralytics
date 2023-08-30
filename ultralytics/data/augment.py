@@ -658,14 +658,19 @@ class Albumentations:
 
             check_version(A.__version__, '1.0.3', hard=True)  # version requirement
 
-            T = [
-                A.Blur(p=0.01),
-                A.MedianBlur(p=0.01),
-                A.ToGray(p=0.01),
-                A.CLAHE(p=0.01),
-                A.RandomBrightnessContrast(p=0.0),
-                A.RandomGamma(p=0.0),
-                A.ImageCompression(quality_lower=75, p=0.0)]  # transforms
+            T = A.Compose([
+                A.VerticalFlip(p=.5),
+                A.HorizontalFlip(p=.5),
+                A.Sharpen(alpha=(.3,.3),p=.5),
+                A.RandomBrightnessContrast(brightness_limit=0.15,contrast_limit=0.15,p=.5),
+                A.RandomGamma(gamma_limit=(80, 120),p=.5),
+                A.GaussNoise(var_limit=(1,30),  mean=0, p=.5),
+                A.CLAHE(p=.5),
+                A.ToGray(p=1.0),
+                A.Resize(height=640, width=640),
+                
+            ])
+            
             self.transform = A.Compose(T, bbox_params=A.BboxParams(format='yolo', label_fields=['class_labels']))
 
             LOGGER.info(prefix + ', '.join(f'{x}'.replace('always_apply=False, ', '') for x in T if x.p))
