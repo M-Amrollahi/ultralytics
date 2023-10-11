@@ -9,7 +9,7 @@ model:  # (str, optional) path to model file, i.e. yolov8n.pt, yolov8n.yaml
 data:  # (str, optional) path to data file, i.e. coco128.yaml
 epochs: 100  # (int) number of epochs to train for
 patience: 0  # (int) epochs to wait for no observable improvement for early stopping of training
-batch: 8  # (int) number of images per batch (-1 for AutoBatch)
+batch: 4  # (int) number of images per batch (-1 for AutoBatch)
 imgsz: 640  # (int | list) input images size as int for train and val modes, or list[w,h] for predict and export modes
 save: True  # (bool) save train checkpoints and predict results
 save_period: -1 # (int) Save checkpoint every x epochs (disabled if < 1)
@@ -20,7 +20,7 @@ project:  # (str, optional) project name
 name:  # (str, optional) experiment name, results saved to 'project/name' directory
 exist_ok: False  # (bool) whether to overwrite existing experiment
 pretrained: True  # (bool | str) whether to use a pretrained model (bool) or a model to load weights from (str)
-optimizer: auto  # (str) optimizer to use, choices=[SGD, Adam, Adamax, AdamW, NAdam, RAdam, RMSProp, auto]
+optimizer: AdamW  # (str) optimizer to use, choices=[SGD, Adam, Adamax, AdamW, NAdam, RAdam, RMSProp, auto]
 verbose: True  # (bool) whether to print verbose output
 seed: 0  # (int) random seed for reproducibility
 deterministic: True  # (bool) whether to enable deterministic mode
@@ -37,7 +37,7 @@ freeze: None  # (int | list, optional) freeze first n layers, or freeze list of 
 overlap_mask: True  # (bool) masks should overlap during training (segment train only)
 mask_ratio: 4  # (int) mask downsample ratio (segment train only)
 # Classification
-dropout: 0.2 #0.0  # (float) use dropout regularization (classify train only)
+dropout: 0.0  # (float) use dropout regularization (classify train only)
 
 # Val/Test settings ----------------------------------------------------------------------------------------------------
 val: True  # (bool) validate/test during training
@@ -81,8 +81,8 @@ workspace: 4  # (int) TensorRT: workspace size (GB)
 nms: True  # (bool) CoreML: add NMS
 
 # Hyperparameters ------------------------------------------------------------------------------------------------------
-lr0: 0.003  # (float) initial learning rate (i.e. SGD=1E-2, Adam=1E-3)
-lrf: 0.003  # (float) final learning rate (lr0 * lrf)
+lr0: 0.0005  # (float) initial learning rate (i.e. SGD=1E-2, Adam=1E-3)
+lrf: 0.0005  # (float) final learning rate (lr0 * lrf)
 momentum: 0.937  # (float) SGD momentum/Adam beta1
 weight_decay: 0.0005  # (float) optimizer weight decay 5e-4
 warmup_epochs: 3.0  # (float) warmup epochs (fractions ok)
@@ -105,7 +105,7 @@ shear: 0.0  # (float) image shear (+/- deg)
 perspective: 0.0  # (float) image perspective (+/- fraction), range 0-0.001
 flipud: 0.0  # (float) image flip up-down (probability)
 fliplr: 0.0  # (float) image flip left-right (probability)
-mosaic: 0.5  # (float) image mosaic (probability)
+mosaic: 0.0  # (float) image mosaic (probability)
 mixup: 0.0  # (float) image mixup (probability)
 copy_paste: 0.0  # (float) segment copy-paste (probability)
 
