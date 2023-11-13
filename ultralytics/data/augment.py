@@ -666,7 +666,7 @@ class Albumentations:
                 A.RandomGamma(gamma_limit=(80, 120),p=.5),
                 A.GaussNoise(var_limit=(1,30),  mean=0, p=.5),
                 A.CLAHE(p=.5),
-                A.ToGray(p=1.0),
+                #A.ToGray(p=1.0),
                 A.Resize(height=640, width=640),
                 
             ])
