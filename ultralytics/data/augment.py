@@ -659,15 +659,17 @@ class Albumentations:
             check_version(A.__version__, '1.0.3', hard=True)  # version requirement
 
             T = A.Compose([
-                A.VerticalFlip(p=.5),
-                A.HorizontalFlip(p=.5),
-                A.Sharpen(alpha=(.3,.3),p=.5),
-                A.RandomBrightnessContrast(brightness_limit=0.15,contrast_limit=0.15,p=.5),
-                A.RandomGamma(gamma_limit=(80, 120),p=.5),
-                A.GaussNoise(var_limit=(1,30),  mean=0, p=.5),
-                A.CLAHE(p=.5),
-                #A.ToGray(p=1.0),
-                A.Resize(height=640, width=640),
+                A.VerticalFlip(p = .5),
+                A.HorizontalFlip(p = .5),
+                A.Sharpen(alpha=(.3, .3),p = .5),
+                A.RandomBrightnessContrast(brightness_limit = 0.15, contrast_limit = 0.15, p = .5),
+                A.RandomGamma(gamma_limit = (80, 120),p = .5),
+                A.GaussNoise(var_limit = (1,30),  mean = 0, p = .5),
+                A.Downscale(scale_min = 0.80, scale_max = 0.99, p = 0.5),
+                A.PixelDropout(dropout_prob = .05, p = 0.5, drop_value = 127),
+                A.Rotate(limit = (-30,30), interpolation = 4, border_mode = 2, p = 0.5),
+                A.CLAHE(p = .5),
+                A.Resize(height = 640, width = 640),
                 
             ])
             
