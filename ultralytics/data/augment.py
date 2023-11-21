@@ -669,7 +669,7 @@ class Albumentations:
                 #A.PixelDropout(dropout_prob = .05, p = 0.5, drop_value = 127),
                 #A.Rotate(limit = (-30,30), interpolation = 4, border_mode = 2, p = 0.5),
                 A.CLAHE(p = .5),
-                A.Resize(height = 640, width = 640),
+                A.Resize(height = 320, width = 320),
                 A.RandomCrop(height = 320,width=320, p=1.0)
             ])
             
