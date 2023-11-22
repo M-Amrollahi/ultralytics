@@ -667,10 +667,10 @@ class Albumentations:
                 A.GaussNoise(var_limit = (1,30),  mean = 0, p = .5),
                 #A.Downscale(scale_min = 0.80, scale_max = 0.99, p = 0.5),
                 #A.PixelDropout(dropout_prob = .05, p = 0.5, drop_value = 127),
-                #A.Rotate(limit = (-30,30), interpolation = 4, border_mode = 2, p = 0.5),
+                A.Rotate(limit = (-30,30), interpolation = 4, border_mode = 2, p = 0.5),
                 A.CLAHE(p = .5),
-                A.Resize(height = 320, width = 320),
-                A.RandomCrop(height = 320,width=320, p=1.0)
+                #A.Resize(height = 320, width = 320),
+                #A.RandomCrop(height = 320,width=320, p=1.0)
             ])
             
             self.transform = A.Compose(T, bbox_params=A.BboxParams(format='yolo', label_fields=['class_labels']))
